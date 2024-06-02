@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2doe2aqtuvfw"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_2prob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vh6ur"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_2prob")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.508945, 0.297005, 9.62615e-08, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_vh6ur")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -23.0
+offset_right = 18.0
+offset_bottom = -9.0
+theme_override_font_sizes/font_size = 10
+text = "jogador"
