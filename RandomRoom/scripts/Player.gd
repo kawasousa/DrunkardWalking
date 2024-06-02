@@ -1,24 +1,25 @@
 extends CharacterBody2D
 
-const SPEED = 1000
-@onready var navigation_agent_2d = $NavigationAgent2D
+var speed = 10
+@onready var nav_agent = $NavigationAgent2D
+@onready var InputDirection = global_position
 
 
 func _physics_process(delta):
-	navigation_agent_2d.target_position = get_global_mouse_position()
-	var direction = Vector3()
-	direction = navigation_agent_2d.get_next_path_position() - global_position
-	velocity = direction * 2
-	#var directionX = Input.get_axis("ui_left", "ui_right")
-	#var directionY = Input.get_axis("ui_up", "ui_down")
-	#if directionX != 0:
-		#velocity.x = directionX * SPEED
-	#else:
-		#velocity.x = 0
-	#
-	#if directionY != 0:
-		#velocity.y = directionY * SPEED
-	#else:
-		#velocity.y = 0
+	if Input.is_action_pressed("ui_right"):
+		InputDirection += Vector2.RIGHT
+	elif Input.is_action_pressed("ui_left"):
+		InputDirection += Vector2.LEFT
+	if Input.is_action_pressed("ui_up"):
+		InputDirection += Vector2.UP
+	elif Input.is_action_pressed("ui_down"):
+		InputDirection += Vector2.DOWN
+	
+	if global_position.distance_to(nav_agent.target_position) > 32:
+		InputDirection = global_position
+	
+	nav_agent.target_position = InputDirection
+	var direction = nav_agent.get_next_path_position() - global_position
+	velocity = direction
 
 	move_and_slide()

@@ -1,7 +1,7 @@
 extends Node2D
 
 var steps = 0
-var max_steps = 100
+var max_steps = 50
 var player_spawned: bool = false
 const PLAYER = preload("res://scenes/Player.tscn")
 @onready var drunkard = $drunkard

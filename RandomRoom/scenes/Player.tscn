@@ -31,7 +31,7 @@ position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_vh6ur")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_postprocessing = 1
+debug_enabled = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = -19.0
