@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dliqkistkijah"]
-
-[ext_resource type="Script" path="res://scripts/drunkard.gd" id="1_0kxed"]
-
-[node name="drunkard" type="RigidBody2D"]
-gravity_scale = 0.0
-script = ExtResource("1_0kxed")
