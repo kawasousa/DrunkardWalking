@@ -1,0 +1,17 @@
+language: c
+
+os:
+  - linux
+  - osx
+
+addons:
+  apt:
+    packages:
+      - libudev-dev
+
+script:
+  - cmake -H. -B_build
+  - cmake --build _build
+
+notifications:
+  email: false
