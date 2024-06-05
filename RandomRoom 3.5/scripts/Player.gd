@@ -1,16 +1,23 @@
 extends KinematicBody2D
 class_name Player
 
-var speed = 8000
+var speed = 5000
 onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 var velocity: Vector2
 var camera: Camera2D = Camera2D.new()
+onready var tween = Tween.new()
 
 
 func _ready():
+	add_child(tween)
 	camera.current = true
-	camera.zoom = Vector2(0.8,0.8)
+	camera.limit_top = 0
+	camera.limit_left = 0
+	camera.smoothing_enabled = true
+	camera.smoothing_speed = 20
 	add_child(camera)
+	tween.interpolate_property(camera, "zoom", Vector2(1,1), Vector2(0.2,0.2), 0.5, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	tween.start()
 
 func _physics_process(delta):
 	movement(delta)

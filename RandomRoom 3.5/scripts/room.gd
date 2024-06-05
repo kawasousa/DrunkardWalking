@@ -43,8 +43,10 @@ func spawnArea():
 func setTrackTileset() -> void:
 	var drunkardLocalPosition = tileMap.to_local(drunkard.global_position)
 	var cellPosition = tileMap.world_to_map(drunkardLocalPosition) # Converte a posição atual do drunkard para uma posição de célula no Tilemap.
-	tileMap.set_cellv(cellPosition, 0) # define a celula para o tieleset[0], uma que nao tem colisao
+	if tileMap.get_cellv(cellPosition) != 0:
+		tileMap.set_cellv(cellPosition, 0) # define a celula para o tieleset[0], uma que nao tem colisao
 
+## Preenche toda tela com o tileset[1]
 func fillTileScreen() -> void:
 	var startCell = tileMap.world_to_map(Vector2.ZERO)
 	var finishCell = tileMap.world_to_map(get_viewport().size)

@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+extents = Vector2( 4, 4 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -18,19 +18,18 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -8.0
 margin_top = -8.0
-margin_right = 8.0
-margin_bottom = 8.0
 color = Color( 0.192157, 0.513726, 0.145098, 1 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 32.0
-margin_bottom = -2.0
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 39.0
+margin_bottom = 6.0
+rect_scale = Vector2( 0.5, 0.5 )
 text = "jogador"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 8, 8 )
+position = Vector2( 4, 4 )
 shape = SubResource( 1 )
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
