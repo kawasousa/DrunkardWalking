@@ -1,7 +1,7 @@
 extends Node2D
 
 var steps: int = 0
-var maxSteps: int = Global.max_steps
+var maxSteps: int = Global.maxSteps
 var playerSpawned: bool = false
 var areaSpawned: bool = false
 const PLAYER = preload("res://scenes/Player.tscn")
@@ -12,17 +12,19 @@ onready var player_spawn_position = drunkard.global_position
 
 
 func _ready():
-	randomize() # rng
+	randomize() # Aumenta a aleatoriedade na criação do mapa
+	fillTileScreen()
+	
 
 func _process(delta):
-	set_tileset()
+	setTrackTileset()
 	
 	if steps == maxSteps:
-		spawn_player()
-		spawn_area()
+		spawnPlayer()
+		spawnArea()
 
 ## Adiciona o player na cena
-func spawn_player() -> void:
+func spawnPlayer() -> void:
 	if playerSpawned == false:
 		var player = PLAYER.instance()
 		player.global_position = player_spawn_position
@@ -30,7 +32,7 @@ func spawn_player() -> void:
 		playerSpawned = true
 
 ## Adiciona o objetivo na cena.
-func spawn_area():
+func spawnArea():
 	if areaSpawned == false:
 		var area = RELOAD_AREA.instance()
 		area.global_position = drunkard.global_position
@@ -38,13 +40,21 @@ func spawn_area():
 		areaSpawned = true
 
 ## Apaga a célula na posição onde o Drunkard está.
-func set_tileset() -> void:
-	tileMap.set_cellv(drunkard.global_position / 32, 0) # define a celula para o tieleset[0], uma que nao tem colisao
+func setTrackTileset() -> void:
+	var drunkardLocalPosition = tileMap.to_local(drunkard.global_position)
+	var cellPosition = tileMap.world_to_map(drunkardLocalPosition) # Converte a posição atual do drunkard para uma posição de célula no Tilemap.
+	tileMap.set_cellv(cellPosition, 0) # define a celula para o tieleset[0], uma que nao tem colisao
 
+func fillTileScreen() -> void:
+	var startCell = tileMap.world_to_map(Vector2.ZERO)
+	var finishCell = tileMap.world_to_map(get_viewport().size)
+	for xCell in range(startCell.x, finishCell.x + 1):
+		for yCell in range(startCell.y, finishCell.y + 1):
+			tileMap.set_cellv(Vector2(xCell, yCell), 1)
 
 ## Delay de movimento do drunkard
 func _on_Timer_timeout():
 	if steps < maxSteps:
 		randomize()
-		drunkard.random_move()
+		drunkard.randomMove()
 		steps += 1

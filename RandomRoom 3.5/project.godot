@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
+"base": "",
 "class": "GDSerComm",
 "language": "NativeScript",
 "path": "res://addons/GDSerCommDock/bin/GDSerComm.gdns"
@@ -28,11 +28,10 @@ _global_script_class_icons={
 
 config/name="Random Room 3.5"
 run/main_scene="res://scenes/Room.tscn"
-config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://autoload/global.tscn"
+Global="*res://autoload/Global.tscn"
 
 [display]
 
